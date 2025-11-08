@@ -90,28 +90,31 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
           }}
         >
           <SafeAreaView className="flex-1" edges={['top', 'bottom']}>
-            {/* Header minimaliste */}
-            <View className="px-6 pt-6 pb-8 border-b border-gray-100">
-              <TouchableOpacity 
-                onPress={onClose}
-                className="self-end mb-6 p-2 -mr-2"
-              >
-                <Ionicons name="close" size={24} color="#000" />
-              </TouchableOpacity>
-              
-              {/* Avatar et infos utilisateur */}
-              <View className="flex-row items-center">
-                <View className="w-14 h-14 rounded-full bg-black items-center justify-center">
-                  <Text className="text-white text-lg font-bold">MA</Text>
+            {/* Header avec X, avatar et nom dans la même ligne */}
+            <View className="px-6 pt-6 pb-6 border-b border-gray-100">
+              <View className="flex-row items-center justify-between">
+                {/* Avatar et nom */}
+                <View className="flex-row items-center flex-1">
+                  <View className="w-12 h-12 rounded-full bg-black items-center justify-center">
+                    <Text className="text-white text-base font-bold">MA</Text>
+                  </View>
+                  <View className="ml-3 flex-1">
+                    <Text className="text-black text-sm font-semibold tracking-tight">
+                      Mohamed Ali
+                    </Text>
+                    <Text className="text-gray-500 text-xs mt-0.5">
+                      Explorateur
+                    </Text>
+                  </View>
                 </View>
-                <View className="ml-4 flex-1">
-                  <Text className="text-black text-base font-semibold tracking-tight">
-                    Mohamed Ali
-                  </Text>
-                  <Text className="text-gray-500 text-sm mt-0.5">
-                    Explorateur
-                  </Text>
-                </View>
+                
+                {/* Bouton X */}
+                <TouchableOpacity 
+                  onPress={onClose}
+                  className="p-2 -mr-2"
+                >
+                  <Ionicons name="close" size={22} color="#000" />
+                </TouchableOpacity>
               </View>
             </View>
 
@@ -210,7 +213,7 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
             {/* Footer avec version */}
             <View className="px-6 py-4 border-t border-gray-100">
               <Text className="text-gray-400 text-xs text-center">
-                Morocco Explorer • Version 1.0.0
+                Morocco Explorer
               </Text>
             </View>
           </SafeAreaView>

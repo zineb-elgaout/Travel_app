@@ -5,3 +5,4 @@ export { default as LoginScreen} from './LoginScreen';
 export { default as SignupScreen} from './SignUpScreen';
 export {default as ExploreScreen} from './ExploreScreen';
 export { default as ChatbotScreen } from './ChatbotScreen';
+export { default as FavoritesScreen } from './FavoritesScreen';
