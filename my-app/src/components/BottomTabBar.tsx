@@ -44,7 +44,7 @@ export default function BottomTabBar({ currentRoute }: BottomTabBarProps) {
   return (
     <View className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-300">
       <SafeAreaView edges={['bottom']}>
-        <View className="flex-row justify-between items-center px-6 py-3">
+        <View className="flex-row justify-between items-center px-6 py-1">
           {tabs.map((tab) => {
             const isActive = currentRoute === tab.route;
             
