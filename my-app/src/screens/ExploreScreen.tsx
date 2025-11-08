@@ -418,7 +418,7 @@ export default function ExploreScreen() {
             </TouchableOpacity>
             
             <Text className="text-2xl font-bold text-black">
-              {t('discover') || 'Discover'}
+              {t('discover') || 'Explore'}
             </Text>
             
             <TouchableOpacity>
@@ -428,15 +428,12 @@ export default function ExploreScreen() {
             </TouchableOpacity>
           </View>
 
-          {/* Filtres de contenu principaux - Alignés à gauche */}
-          <View className="px-6 mb-2 ">
+          {/* Filtres principaux - Style minimaliste */}
+          <View className="px-6 py-4 bg-white border-b border-gray-100">
             <ScrollView 
               horizontal 
               showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ 
-                gap: 6,
-                paddingRight: 24
-              }}
+              contentContainerStyle={{ gap: 8 }}
             >
               {contentFilters.map((filter) => (
                 <TouchableOpacity
@@ -445,20 +442,20 @@ export default function ExploreScreen() {
                     setContentFilter(filter.id);
                     setSelectedCategory('popular');
                   }}
-                  className={`flex-row items-center px-4 py-2 rounded-full border-2 ${
+                  className={`flex-row items-center px-4 py-2 rounded-full ${
                     contentFilter === filter.id 
-                      ? 'bg-black border-black' 
-                      : 'bg-white border-gray-300 '
+                      ? 'bg-black' 
+                      : 'bg-gray-100'
                   }`}
                 >
                   <Ionicons 
                     name={filter.icon} 
-                    size={18} 
-                    color={contentFilter === filter.id ? "white" : "gray"} 
+                    size={16} 
+                    color={contentFilter === filter.id ? "white" : "#6B7280"} 
                   />
                   <Text 
-                    className={`ml-1 text-sm font-medium ${
-                      contentFilter === filter.id ? 'text-white' : 'text-gray-500'
+                    className={`ml-1.5 text-sm font-medium ${
+                      contentFilter === filter.id ? 'text-white' : 'text-gray-600'
                     }`}
                   >
                     {filter.name}
