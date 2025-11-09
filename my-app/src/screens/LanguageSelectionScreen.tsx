@@ -48,7 +48,7 @@ export default function LanguageSelectionScreen() {
             <View className="border-t border-black/20 w-16 mb-6" />
             
             <Text className="text-gray-600 text-lg text-center leading-7 font-light italic px-4">
-              "Where ancient traditions meet modern elegance. Discover the soul of Morocco in every detail."
+             "Travel with heart. Explore Morocco's wonders while supporting communities and preserving our planet."
             </Text>
           </View>
 

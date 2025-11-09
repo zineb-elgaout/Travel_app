@@ -75,13 +75,13 @@ const translations = {
     slide2_subtitle: 'The Blue Pearl',
     slide2_desc: 'Wander through azure streets and discover timeless serenity',
     
-    slide3_title: 'SAHARA',
-    slide3_subtitle: 'Golden Dunes',
-    slide3_desc: 'Experience the infinite beauty of endless golden horizons',
-    
-    slide4_title: 'DESERT ADVENTURE',
-    slide4_subtitle: 'Sand & Stars',
-    slide4_desc: 'Journey through majestic dunes under vast desert skies',
+    slide3_title: 'MARRAKECH',
+    slide3_subtitle: 'Artisan Heritage',
+    slide3_desc: 'Discover centuries-old craftsmanship in vibrant souks and workshops',
+
+    slide4_title: 'TBOURIDA',
+    slide4_subtitle: 'Equestrian Art',
+    slide4_desc: 'Witness Morocco\'s majestic traditional horseback performance',
     
     slide5_title: 'SAHARA MAJESTY',
     slide5_subtitle: 'Golden Sands',
