@@ -42,7 +42,7 @@ export const ExploreCarousel: React.FC<ExploreCarouselProps> = ({
         <View 
           key={index}
           className={`h-2 rounded-full ${
-            index === 0 ? 'w-6 bg-black' : 'w-2 bg-gray-300'
+            index === 0 ? 'w-6 bg-custom-green' : 'w-2 bg-gray-300'
           }`}
         />
       ))}

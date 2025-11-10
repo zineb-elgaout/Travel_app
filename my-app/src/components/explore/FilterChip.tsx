@@ -25,7 +25,7 @@ export const FilterChip: React.FC<FilterChipProps> = ({
     hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
     activeOpacity={0.85}
     className={`flex-row items-center px-4 py-2 rounded-full ${
-      isActive ? 'bg-black' : 'bg-gray-100'
+      isActive ? 'bg-custom-green' : 'bg-gray-100'
     }`}
   >
     {icon && (

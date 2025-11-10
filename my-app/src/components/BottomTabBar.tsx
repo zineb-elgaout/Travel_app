@@ -48,7 +48,7 @@ const TabButton = ({ tab, isActive, onPress, isRTL }) => {
           paddingHorizontal: 20,
           paddingVertical: 12,
           borderRadius: 999,
-          backgroundColor: isActive ? '#000000' : 'transparent',
+          backgroundColor: isActive ? '#90AF84' : 'transparent',
           transform: [{ scale: scaleAnim.interpolate({
             inputRange: [0, 1],
             outputRange: [0.95, 1],

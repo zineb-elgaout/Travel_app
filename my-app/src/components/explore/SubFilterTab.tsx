@@ -15,16 +15,20 @@ export const SubFilterTab: React.FC<SubFilterTabProps> = ({
 }) => (
   <TouchableOpacity
     onPress={onPress}
-    className={`px-2 py-3 ml-1 ${
-      isActive ? 'border-b-2 rounded-l border-indigo-200' : ''
-    }`}
+    className={`px-4 py-3 mx-1 ${isActive ? '' : ''}`}
+    activeOpacity={0.7}
   >
-    <Text 
-      className={`text-base font-medium ${
-        isActive ? 'text-black' : 'text-gray-600'
-      }`}
-    >
-      {label}
-    </Text>
+    <View className="items-center">
+      <Text 
+        className={`text-base ${isActive ? 'text-black font-bold' : 'text-gray-600 font-medium'}`}
+      >
+        {label}
+      </Text>
+      
+      {/* Ligne en bas - courte et centrée */}
+      {isActive && (
+        <View className="w-8 h-1 bg-black rounded-full mt-1" />
+      )}
+    </View>
   </TouchableOpacity>
 );

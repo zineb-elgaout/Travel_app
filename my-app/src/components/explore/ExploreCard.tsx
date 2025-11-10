@@ -55,9 +55,9 @@ export const ExploreCard: React.FC<ExploreCardProps> = ({
         {/* Catégorie */}
         {showCategoryBadge && item.category && (
           <View
-            className={`absolute top-${isSlide ? "4" : "3"} left-${
-              isSlide ? "4" : "3"
-            } px-${isSlide ? "3" : "2"} py-1 rounded-full ${
+            className={`absolute ${
+              isSlide ? "top-4 left-4" : "top-3 left-3"
+            } px-3 py-1 rounded-full ${
               contentFilter === "crafts" ? "bg-amber-600" : "bg-green-600"
             }`}
           >
@@ -71,7 +71,7 @@ export const ExploreCard: React.FC<ExploreCardProps> = ({
         <TouchableOpacity
           className={`
             absolute rounded-full items-center justify-center shadow-lg
-            ${isSlide ? "top-4 right-4 w-10 h-10 bg-white" : "top-3 right-3 w-8 h-8 bg-white/90"}
+            ${isSlide ? "top-4 right-4 w-8 h-8 bg-white" : "top-3 right-3 w-8 h-8 bg-white/90"}
           `}
           onPress={() => onToggleFavorite?.(item.id)}
           accessibilityRole="button"
@@ -82,42 +82,56 @@ export const ExploreCard: React.FC<ExploreCardProps> = ({
         >
           <Ionicons
             name={item.isFavorite ? "heart" : "heart-outline"}
-            size={isSlide ? 20 : 16}
+            size={isSlide ? 18 : 16}
             color={item.isFavorite ? "#EC4899" : "#6B7280"}
           />
         </TouchableOpacity>
 
         {/* Texte et note */}
-        <View className={`absolute bottom-0 left-0 right-0 p-${isSlide ? "5" : "3"}`}>
+        <View className={`absolute bottom-0 left-0 right-0 ${
+          isSlide ? "p-5" : "p-4"
+        }`}>
+          {/* Localisation - seulement pour les slides */}
           {isSlide && (
-            <View className="flex-row items-center mb-2">
+            <View className="flex-row items-center mb-3">
               <Ionicons name="location" size={16} color="#FFF" />
-              <Text className="text-white text-sm ml-1 font-medium">
+              <Text className="text-white text-sm ml-2 font-medium">
                 {item.location}
               </Text>
             </View>
           )}
 
+          {/* Nom */}
           <Text
-            className={`text-white ${isSlide ? "text-xl" : "text-base"} font-bold mb-1`}
-            numberOfLines={1}
+            className={`text-white ${
+              isSlide ? "text-xl mb-2" : "text-lg mb-1.5"
+            } font-bold`}
+            numberOfLines={isSlide ? 2 : 1}
           >
             {item.name}
           </Text>
 
+          {/* Description */}
           <Text
-            className={`text-white/80 ${isSlide ? "text-sm" : "text-xs"} mb-2`}
-            numberOfLines={1}
+            className={`text-white/80 ${
+              isSlide ? "text-sm mb-3" : "text-xs mb-2.5"
+            }`}
+            numberOfLines={isSlide ? 2 : 1}
           >
             {item.description}
           </Text>
 
+          {/* Note */}
           <View className="flex-row items-center">
-            <Ionicons name="star" size={isSlide ? 16 : 12} color="#FBBF24" />
+            <Ionicons 
+              name="star" 
+              size={isSlide ? 18 : 14} 
+              color="#FBBF24" 
+            />
             <Text
-              className={`text-white ${isSlide ? "text-base" : "text-sm"} ml-1 font-${
-                isSlide ? "semibold" : "medium"
-              }`}
+              className={`text-white ${
+                isSlide ? "text-base ml-2" : "text-sm ml-1.5"
+              } font-semibold`}
             >
               {item.rating}
             </Text>
