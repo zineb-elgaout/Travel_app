@@ -91,7 +91,6 @@ export default function EcoTipsScreen() {
           <Text className="text-xl font-bold text-gray-900">
             {section.title}
           </Text>
-          
         </View>
         <TouchableOpacity className="flex-row items-center">
           <Text className="text-custom-green font-semibold text-sm mr-1">

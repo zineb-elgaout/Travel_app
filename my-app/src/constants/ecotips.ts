@@ -1,21 +1,57 @@
-// Photos animées colorées
+
+const CLOUD_NAME = 'dpkjgfhcc';
+
+// Fonction helper pour générer des URLs optimisées
+const createOptimizedUrl = (imageName: string, width: number = 400, height: number = 300) => {
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/` +
+         `f_webp,` +          // Format WebP
+         `w_${width},` +      // Largeur
+         `h_${height},` +     // Hauteur  
+         `c_fill,` +          // Recadrage
+         `q_auto:good,` +     // Qualité optimisée
+         `dpr_auto,` +        // Densité de pixels auto
+         `fl_lossy` +         // Compression lossy
+         `/ecotips/${imageName}`;
+};
+
+// Photos animées colorées - URLs Cloudinary ULTRA optimisées
+export const ANIMATED_IMAGES_HD = {
+  transport: createOptimizedUrl('transport'),
+  walking: createOptimizedUrl('walking'),
+  riads: createOptimizedUrl('riads'),
+  water: createOptimizedUrl('water'),
+  food: createOptimizedUrl('food'),
+  waste: createOptimizedUrl('waste'),
+  bottle: createOptimizedUrl('bottle'),
+  artisan: createOptimizedUrl('artisan'),
+  baskets: createOptimizedUrl('baskets'),
+  quality: createOptimizedUrl('quality'),
+  heritage: createOptimizedUrl('heritage'),
+  hiking: createOptimizedUrl('hiking'),
+  photography: createOptimizedUrl('photography'),
+  recycling: createOptimizedUrl('recycling'),
+  plastic: createOptimizedUrl('plastic'),
+  beach: createOptimizedUrl('beach'),
+};
+
+// URLs pour les images HD (modal)
 export const ANIMATED_IMAGES = {
-  transport: 'https://res.cloudinary.com/dpkjgfhcc/image/upload/v1762902063/pexels-photo-19190382_mfnnlj.jpg',
-  walking: 'https://images.pexels.com/photos/19190382/pexels-photo-19190382.jpeg',
-  riads: 'https://images.pexels.com/photos/30257102/pexels-photo-30257102.jpeg',
-  water: 'https://images.pexels.com/photos/14602556/pexels-photo-14602556.jpeg',
-  food: 'https://images.pexels.com/photos/30574975/pexels-photo-30574975.jpeg',
-  waste: 'https://images.pexels.com/photos/4502972/pexels-photo-4502972.jpeg',
-  bottle: 'https://images.pexels.com/photos/4916544/pexels-photo-4916544.jpeg',
-  artisan: 'https://images.pexels.com/photos/8169414/pexels-photo-8169414.jpeg',
-  baskets: 'https://images.pexels.com/photos/4502967/pexels-photo-4502967.jpeg',
-  quality: 'https://images.pexels.com/photos/18687094/pexels-photo-18687094.jpeg',
-  heritage: 'https://images.pexels.com/photos/13811658/pexels-photo-13811658.jpeg',
-  hiking: 'https://images.pexels.com/photos/1632259/pexels-photo-1632259.jpeg',
-  photography: 'https://images.pexels.com/photos/4621092/pexels-photo-4621092.jpeg',
-  recycling: 'https://images.pexels.com/photos/30550611/pexels-photo-30550611.jpeg',
-  plastic: 'https://images.pexels.com/photos/30413959/pexels-photo-30413959.jpeg',
-  beach: 'https://images.pexels.com/photos/34626734/pexels-photo-34626734.jpeg',
+  transport: createOptimizedUrl('transport', 800, 800),
+  walking: createOptimizedUrl('walking', 800, 800),
+  riads: createOptimizedUrl('riads', 800, 800),
+  water: createOptimizedUrl('water', 800, 800),
+  food: createOptimizedUrl('food', 800, 800),
+  waste: createOptimizedUrl('waste', 800, 800),
+  bottle: createOptimizedUrl('bottle', 800, 800),
+  artisan: createOptimizedUrl('artisan', 800, 800),
+  baskets: createOptimizedUrl('baskets', 800, 800),
+  quality: createOptimizedUrl('quality', 800, 800),
+  heritage: createOptimizedUrl('heritage', 800, 800),
+  hiking: createOptimizedUrl('hiking', 800, 800),
+  photography: createOptimizedUrl('photography', 800, 800),
+  recycling: createOptimizedUrl('recycling', 800, 800),
+  plastic: createOptimizedUrl('plastic', 800, 800),
+  beach: createOptimizedUrl('beach', 800, 800),
 };
 
 // Types TypeScript
