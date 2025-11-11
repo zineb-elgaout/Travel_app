@@ -1,6 +1,6 @@
 // Photos animées colorées
 export const ANIMATED_IMAGES = {
-  transport: 'https://images.pexels.com/photos/3889761/pexels-photo-3889761.jpeg',
+  transport: 'https://res.cloudinary.com/dpkjgfhcc/image/upload/v1762902063/pexels-photo-19190382_mfnnlj.jpg',
   walking: 'https://images.pexels.com/photos/19190382/pexels-photo-19190382.jpeg',
   riads: 'https://images.pexels.com/photos/30257102/pexels-photo-30257102.jpeg',
   water: 'https://images.pexels.com/photos/14602556/pexels-photo-14602556.jpeg',
