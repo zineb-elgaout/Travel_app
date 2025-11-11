@@ -6,3 +6,4 @@ export { default as SignupScreen} from './SignUpScreen';
 export {default as ExploreScreen} from './ExploreScreen';
 export { default as ChatbotScreen } from './ChatbotScreen';
 export { default as FavoritesScreen } from './FavoritesScreen';
+export { default as EcoTipsScreen } from './EcoTipsScreen';

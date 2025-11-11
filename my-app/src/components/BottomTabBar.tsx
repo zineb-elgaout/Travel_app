@@ -109,10 +109,10 @@ export default function BottomTabBar({ currentRoute }: BottomTabBarProps) {
       route: '/favorites' 
     }, 
     { 
-      name: 'itinerary', 
-      label: t('itinerary'), 
-      icon: 'map', 
-      route: '/itinerary' 
+      name: 'ecotips', 
+      label: t('ecotips'), 
+      icon: 'leaf', 
+      route: '/ecotips' 
     }, 
     { 
       name: 'chatbot', 
