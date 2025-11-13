@@ -1,9 +1,9 @@
 // src/screens/ChatbotScreen.tsx
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 interface Message {
@@ -18,6 +18,7 @@ interface Message {
 
 export default function ChatbotScreen() {
   const router = useRouter();
+  const { id } = useLocalSearchParams(); // Récupère l'ID de la conversation
   const { t, isRTL } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -32,6 +33,14 @@ export default function ChatbotScreen() {
   const [isRecording, setIsRecording] = useState(false);
   const [showAudioInterface, setShowAudioInterface] = useState(false);
   const scrollViewRef = useRef<ScrollView>(null);
+
+  // Charger les messages de la conversation si un ID est fourni
+  useEffect(() => {
+    if (id) {
+      // Ici vous chargeriez les messages depuis votre stockage/API
+      console.log('Chargement de la conversation:', id);
+    }
+  }, [id]);
 
   const handleSendMessage = () => {
     if (inputText.trim() === '') return;
@@ -62,7 +71,6 @@ export default function ChatbotScreen() {
   const startRecording = () => {
     setIsRecording(true);
     setShowAudioInterface(true);
-    // Ici vous intégrerez la logique d'enregistrement audio
     console.log('Début enregistrement audio');
   };
 
@@ -70,7 +78,6 @@ export default function ChatbotScreen() {
     setIsRecording(false);
     setShowAudioInterface(false);
     
-    // Simuler l'envoi d'un message audio
     const audioMessage: Message = {
       id: Date.now().toString(),
       text: t('audioMessage'),
@@ -78,12 +85,11 @@ export default function ChatbotScreen() {
       timestamp: new Date(),
       type: 'audio',
       audioUrl: 'simulated-audio-url',
-      duration: 15 // secondes
+      duration: 15
     };
 
     setMessages(prev => [...prev, audioMessage]);
 
-    // Réponse du bot
     setTimeout(() => {
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
@@ -148,13 +154,12 @@ export default function ChatbotScreen() {
   return (
     <View className="flex-1 bg-white">
       <SafeAreaView className="flex-1">
-        {/* Header avec flèche de retour */}
-        <View className="px-6 py-4 border-b border-gray-300">
+        {/* Header */}
+        <View className="px-6 py-4 border-b border-gray-200">
           <View className="flex-row items-center">
-            {/* Bouton retour */}
             <TouchableOpacity 
               onPress={() => router.back()}
-              className="mr-4"
+              className="mr-4 active:opacity-70"
             >
               <Ionicons 
                 name={isRTL ? "chevron-forward" : "chevron-back"} 
@@ -174,13 +179,20 @@ export default function ChatbotScreen() {
               >
                 {t('chatbot')}
               </Text>
-              <Text 
-                className="text-gray-500 text-sm font-light"
-                style={{ writingDirection: isRTL ? 'rtl' : 'ltr' }}
-              >
-                {t('chatbotSubtitle')}
-              </Text>
+              <View className="flex-row items-center">
+                <View className="w-2 h-2 bg-green-500 rounded-full mr-2" />
+                <Text 
+                  className="text-gray-500 text-sm font-light"
+                  style={{ writingDirection: isRTL ? 'rtl' : 'ltr' }}
+                >
+                  En ligne
+                </Text>
+              </View>
             </View>
+
+            <TouchableOpacity className="p-2">
+              <Ionicons name="ellipsis-vertical" size={20} color="#000000" />
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -199,10 +211,10 @@ export default function ChatbotScreen() {
               >
                 <View
                   className={`
-                    max-w-[80%] rounded-none px-4 py-3
+                    max-w-[80%] rounded-2xl px-4 py-3
                     ${message.isUser 
                       ? 'bg-black' 
-                      : 'bg-gray-100 border border-gray-300'
+                      : 'bg-gray-100'
                     }
                   `}
                 >
@@ -223,40 +235,42 @@ export default function ChatbotScreen() {
 
         {/* Interface d'enregistrement audio */}
         {showAudioInterface && (
-          <View className="bg-red-500 mx-6 mb-4 rounded-lg py-4 px-6 flex-row items-center justify-between">
+          <View className="bg-black mx-6 mb-4 rounded-2xl py-4 px-6 flex-row items-center justify-between">
             <View className="flex-row items-center flex-1">
-              <Ionicons name="mic" size={24} color="#FFFFFF" />
+              <View className="w-10 h-10 bg-red-500 rounded-full items-center justify-center">
+                <Ionicons name="mic" size={20} color="#FFFFFF" />
+              </View>
               <View className="ml-4 flex-1">
-                <Text className="text-white text-base font-medium">
-                  {isRecording ? t('recording') : t('processing')}
+                <Text className="text-white text-sm font-medium mb-1">
+                  {isRecording ? 'Enregistrement...' : 'Traitement...'}
                 </Text>
-                <View className="w-full h-1 bg-red-300 rounded-full mt-2">
+                <View className="w-full h-1 bg-gray-700 rounded-full overflow-hidden">
                   <View 
-                    className="h-1 bg-white rounded-full"
+                    className="h-1 bg-red-500 rounded-full"
                     style={{ width: isRecording ? '60%' : '100%' }}
                   />
                 </View>
               </View>
             </View>
             
-            <TouchableOpacity onPress={cancelRecording}>
+            <TouchableOpacity 
+              onPress={cancelRecording}
+              className="ml-4 active:opacity-70"
+            >
               <Ionicons name="close" size={24} color="#FFFFFF" />
             </TouchableOpacity>
           </View>
         )}
 
-        {/* Input avec option audio */}
+        {/* Input */}
         <KeyboardAvoidingView 
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          className="border-t border-gray-300"
+          className="border-t border-gray-200"
         >
           <View className="flex-row items-center px-6 py-4">
-            {/* Bouton microphone */}
             <TouchableOpacity 
               onPress={startRecording}
-              onLongPress={startRecording}
-              delayLongPress={300}
-              className="mr-3"
+              className="mr-3 active:opacity-70"
             >
               <Ionicons 
                 name="mic" 
@@ -265,10 +279,9 @@ export default function ChatbotScreen() {
               />
             </TouchableOpacity>
 
-            {/* Champ texte */}
             <TextInput
-              className="flex-1 bg-gray-100 rounded-full py-3 px-4 text-black text-base border border-gray-300"
-              placeholder={t('typeMessage')}
+              className="flex-1 bg-gray-100 rounded-full py-3 px-4 text-black text-base"
+              placeholder="Message..."
               placeholderTextColor="#9CA3AF"
               value={inputText}
               onChangeText={setInputText}
@@ -277,21 +290,20 @@ export default function ChatbotScreen() {
               maxLength={500}
             />
 
-            {/* Bouton d'envoi ou d'arrêt d'enregistrement */}
             {isRecording ? (
               <TouchableOpacity
                 onPress={stopRecording}
-                className="ml-3 w-12 h-12 bg-red-500 items-center justify-center rounded-full"
+                className="ml-3 w-10 h-10 bg-red-500 items-center justify-center rounded-full active:scale-95"
               >
-                <Ionicons name="stop" size={20} color="#FFFFFF" />
+                <Ionicons name="stop" size={18} color="#FFFFFF" />
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 onPress={handleSendMessage}
                 disabled={inputText.trim() === ''}
-                className="ml-3 w-12 h-12 bg-black rounded-full items-center justify-center disabled:opacity-40"
+                className="ml-3 w-10 h-10 bg-black rounded-full items-center justify-center disabled:opacity-40 active:scale-95"
               >
-                <Ionicons name="send" size={20} color="#FFFFFF" />
+                <Ionicons name="send" size={18} color="#FFFFFF" />
               </TouchableOpacity>
             )}
           </View>

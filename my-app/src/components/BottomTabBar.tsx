@@ -118,7 +118,7 @@ export default function BottomTabBar({ currentRoute }: BottomTabBarProps) {
       name: 'chatbot', 
       label: t('chatbot'), 
       icon: 'chatbubble', 
-      route: '/chatbot' 
+      route: '/conversation' 
     }, 
   ]; 
  

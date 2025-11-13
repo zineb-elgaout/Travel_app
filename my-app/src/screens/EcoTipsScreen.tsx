@@ -57,6 +57,8 @@ export default function EcoTipsScreen() {
           opacity,
         }}
       >
+
+        
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={() => setSelectedTip(category)}
@@ -67,10 +69,13 @@ export default function EcoTipsScreen() {
             className="w-full h-full absolute"
             resizeMode="cover"
           />
+
+            
           <LinearGradient
             colors={['transparent', 'rgba(0,0,0,0.7)']}
             className="absolute bottom-0 left-0 right-0 h-2/3"
           />
+          
           <View className="absolute bottom-0 left-0 right-0 p-5">
             <Text className="text-white text-lg font-bold mb-2">
               {category.title}
