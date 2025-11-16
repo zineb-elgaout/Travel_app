@@ -8,3 +8,4 @@ export { default as ChatbotScreen } from './ChatbotScreen';
 export { default as FavoritesScreen } from './FavoritesScreen';
 export { default as EcoTipsScreen } from './EcoTipsScreen';
 export {default as ConversationsScreen} from './ConversationsScreen';
+export {default as RegionSelectorScreen} from './RegionSelectorScreen';

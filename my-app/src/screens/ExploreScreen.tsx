@@ -38,7 +38,7 @@ export default function ExploreScreen() {
 
   const handleItemPress = useCallback((itemId: number) => {
     const route = getRouteForItem(contentFilter, itemId);
-    router.push(route);
+    router.push(route as any);
   }, [contentFilter, router]);
 
   const activeSubFilters = SUB_FILTERS[contentFilter];
@@ -153,9 +153,9 @@ export default function ExploreScreen() {
 
       <View className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-300">
         <SafeAreaView edges={['bottom']}>
-          <BottomTabBar currentRoute={pathname} />
+          <BottomTabBar currentRoute={pathname || '/explore'} />
         </SafeAreaView>
       </View>
     </View>
   );
-}
+} 

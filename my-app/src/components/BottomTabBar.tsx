@@ -8,9 +8,23 @@ import { Ionicons } from '@expo/vector-icons';
  
 interface BottomTabBarProps { 
   currentRoute: string; 
-} 
+}
 
-const TabButton = ({ tab, isActive, onPress, isRTL }) => {
+interface Tab {
+  name: string;
+  label: string;
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  route: string;
+}
+
+interface TabButtonProps {
+  tab: Tab;
+  isActive: boolean;
+  onPress: () => void;
+  isRTL: boolean;
+}
+
+const TabButton = ({ tab, isActive, onPress, isRTL }: TabButtonProps) => {
   const scaleAnim = useRef(new Animated.Value(isActive ? 1 : 0)).current;
   const opacityAnim = useRef(new Animated.Value(isActive ? 1 : 0)).current;
 
@@ -48,7 +62,7 @@ const TabButton = ({ tab, isActive, onPress, isRTL }) => {
           paddingHorizontal: 20,
           paddingVertical: 12,
           borderRadius: 999,
-          backgroundColor: isActive ? '#90AF84' : 'transparent',
+          backgroundColor: isActive ? '#1d4c4c' : 'transparent',
           transform: [{ scale: scaleAnim.interpolate({
             inputRange: [0, 1],
             outputRange: [0.95, 1],
@@ -58,7 +72,7 @@ const TabButton = ({ tab, isActive, onPress, isRTL }) => {
         <Ionicons  
           name={tab.icon}  
           size={24}  
-          color={isActive ? '#FFFFFF' : '#9CA3AF'}  
+          color={isActive ? '#FFFFFF' : '#1d4c4c'}  
         /> 
         {isActive && (
           <Animated.View
@@ -99,28 +113,28 @@ export default function BottomTabBar({ currentRoute }: BottomTabBarProps) {
     { 
       name: 'explore', 
       label: t('explore'), 
-      icon: 'compass', 
+      icon: 'compass' as const, 
       route: '/explore' 
     }, 
     { 
       name: 'favorites', 
       label: t('favorites'), 
-      icon: 'heart', 
+      icon: 'heart' as const, 
       route: '/favorites' 
     }, 
     { 
       name: 'ecotips', 
       label: t('ecotips'), 
-      icon: 'leaf', 
+      icon: 'leaf' as const, 
       route: '/ecotips' 
     }, 
     { 
       name: 'chatbot', 
       label: t('chatbot'), 
-      icon: 'chatbubble', 
+      icon: 'chatbubble' as const, 
       route: '/conversation' 
     }, 
-  ]; 
+  ] as const; 
  
   return ( 
     <View style={{
@@ -148,7 +162,7 @@ export default function BottomTabBar({ currentRoute }: BottomTabBarProps) {
                 key={tab.name}
                 tab={tab}
                 isActive={isActive}
-                onPress={() => router.push(tab.route)}
+                onPress={() => router.push(tab.route as any)}
                 isRTL={isRTL}
               />
             ); 

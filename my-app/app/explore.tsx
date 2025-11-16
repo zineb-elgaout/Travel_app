@@ -1,2 +1,2 @@
-import { ExploreScreen } from "../src/screens/index";
-export default ExploreScreen;
+import { RegionSelectorScreen } from "../src/screens/index";
+export default RegionSelectorScreen;
