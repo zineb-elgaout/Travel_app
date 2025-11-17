@@ -5,9 +5,9 @@ export const FULL_REGIONS = [
     id: 'tanger-tetouan',
   name: 'Tanger-Tétouan-Al Hoceïma',
     images: [
-      'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=400',
-      'https://images.unsplash.com/photo-1570829460005-c840387bb1ca?w=400',
-      'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=400',
+      'https://images.pexels.com/photos/34337960/pexels-photo-34337960.jpeg',
+      'https://images.pexels.com/photos/34267555/pexels-photo-34267555.jpeg',
+      'https://images.pexels.com/photos/2507804/pexels-photo-2507804.jpeg',
     ],
   },
   {
