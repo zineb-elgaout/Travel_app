@@ -1,7 +1,7 @@
 // src/components/MenuSidebar.tsx
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Modal, Dimensions, StatusBar } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, ScrollView, TouchableOpacity, Modal, Dimensions, Platform } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,6 +16,7 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
   const router = useRouter();
   const { t, isRTL } = useLanguage();
   const { width: screenWidth } = Dimensions.get('window');
+  const insets = useSafeAreaInsets();
 
   const menuOptions = [
     {
@@ -48,9 +49,9 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
       label: t('travel_guide') || 'Guide de Voyage',
       route: '/travel-guide',
     },
+    
   ];
 
-  
   const bottomOptions = [
     {
       icon: 'settings-outline',
@@ -58,7 +59,7 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
       route: '/settings',
     },
     {
-      icon: 'heart-outline',
+      icon: 'help-circle-outline',
       label: t('help') || 'Aide & Support',
       route: '/help',
     },
@@ -81,9 +82,9 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
     <Modal
       visible={visible}
       transparent
-      animationType="none"
+      animationType="fade"
       onRequestClose={onClose}
-      statusBarTranslucent
+      statusBarTranslucent={Platform.OS === 'android'}
     >
       <View className="flex-1 flex-row">
         {/* Sidebar with blur effect */}
@@ -91,21 +92,14 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
           intensity={80}
           tint="dark"
           style={{
-            width: screenWidth * 0.75,
+            width: screenWidth * 1,
             backgroundColor: 'rgba(29, 76, 76, 0.85)',
           }}
         >
-          <SafeAreaView className="flex-1" edges={['top', 'bottom', 'left']} style={{ paddingTop: StatusBar.currentHeight || 0 }}>
+          <View style={{ paddingTop: insets.top, flex: 1 }}>
             {/* Header with avatar and close button */}
-
-            {/* Menu Options */}
-            <ScrollView 
-              className="flex-1 px-10 pt-12 pb-6"
-              showsVerticalScrollIndicator={false}
-            >
-              {/* Header with avatar and close button */}
-              <View className="px-5 pb-8">
-              <View className="flex-row items-center justify-between mb-6">
+            <View className="px-10 pt-12 pb-8">
+              <View className="flex-row items-center justify-between">
                 {/* Avatar */}
                 <View className="w-11 h-11 rounded-full bg-white/20 items-center justify-center">
                   <Ionicons name="person" size={22} color="#FFF" />
@@ -123,7 +117,11 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
             </View>
 
             {/* Menu Options */}
-            <ScrollView className="px-5">
+            <ScrollView 
+              className="flex-1 px-10 "
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}
+            >
               {menuOptions.map((option, index) => (
                 <TouchableOpacity
                   key={index}
@@ -173,9 +171,8 @@ export default function MenuSidebar({ visible, onClose }: MenuSidebarProps) {
                   </Text>
                 </TouchableOpacity>
               ))}
-              </ScrollView>
             </ScrollView>
-          </SafeAreaView>
+          </View>
         </BlurView>
 
         {/* Right side - Touchable overlay to close */}

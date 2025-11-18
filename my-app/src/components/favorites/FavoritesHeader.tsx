@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { GlobalHeader } from '../GlobalHeader';
 
@@ -18,12 +18,12 @@ export const FavoritesHeader: React.FC<FavoritesHeaderProps> = ({
 }) => (
   <View className="px-6 py-4 bg-white border-b border-gray-100">
     <GlobalHeader
-      element="favorites"
-      onMenuPress={() => {/* ouvrir menu */}}
-      onSearchPress={() => {/* ouvrir recherche */}}
+      element={element}
+      onMenuPress={onMenuPress}
+      onSearchPress={onSearchPress}
     />
 
-    <View className="flex-row items-center">
+    <View className="flex-row items-center mt-2">
       <Ionicons name="heart" size={18} color="#EF4444" />
       <Text className="text-gray-600 text-sm ml-2">
         {count} {count > 1 ? 'destinations sauvegardées' : 'destination sauvegardée'}
