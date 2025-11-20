@@ -255,22 +255,7 @@ export default function ConversationsScreen() {
           showsVerticalScrollIndicator={false}
         />
 
-        {/* FAB - Floating Action Button */}
-        {!longPressedItem && (
-          <TouchableOpacity
-            onPress={handleNewConversation}
-            className="absolute bottom-20 right-6 w-14 h-14 bg-green-600 rounded-full items-center justify-center shadow-lg active:scale-95"
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.3,
-              shadowRadius: 8,
-              elevation: 8,
-            }}
-          >
-            <Ionicons name="chatbubble" size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-        )}
+        
       </SafeAreaView>
 
       <BottomTabBar currentRoute="/conversation" />
