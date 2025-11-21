@@ -12,19 +12,19 @@ const { width } = Dimensions.get('window');
 const carouselData = [
   {
     id: 1,
-    image: 'https://images.pexels.com/photos/30574975/pexels-photo-30574975.jpeg',
+    image: 'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_1200,q_auto,f_auto,dpr_auto/carousel/carousel-welcome.jpg',
     title: 'Welcome to MoroccoExplore',
     subtitle: 'Discover the magic of Morocco'
   },
   {
     id: 2,
-    image: 'https://images.pexels.com/photos/4502973/pexels-photo-4502973.jpeg',
+    image: 'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_1200,q_auto,f_auto,dpr_auto/carousel/carousel-cities.jpg',
     title: 'Explore Ancient Cities',
     subtitle: 'From Marrakech to Fes'
   },
   {
     id: 3,
-    image: 'https://images.pexels.com/photos/12214734/pexels-photo-12214734.jpeg',
+    image: 'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_1200,q_auto,f_auto,dpr_auto/carousel/carousel-desert.jpg',
     title: 'Desert Adventures',
     subtitle: 'Experience the Sahara'
   }

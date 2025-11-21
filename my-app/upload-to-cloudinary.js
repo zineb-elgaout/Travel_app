@@ -1,4 +1,4 @@
-// upload-to-cloudinary.js
+// upload-carousel-to-cloudinary.js
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -7,88 +7,42 @@ cloudinary.config({
   api_secret: 'kX2n1tJcxjCNma9z0YU3htgVnkc'
 });
 
-// 📸 Liste de toutes vos images
-const images = [
+// 📸 Carousel images
+const carouselImages = [
   { 
-    name: 'transport', 
-    url: 'https://images.pexels.com/photos/3889761/pexels-photo-3889761.jpeg' 
+    name: 'carousel-welcome', 
+    url: 'https://images.pexels.com/photos/30574975/pexels-photo-30574975.jpeg',
+    title: 'Welcome to MoroccoExplore',
+    subtitle: 'Discover the magic of Morocco'
   },
   { 
-    name: 'walking', 
-    url: 'https://images.pexels.com/photos/19190382/pexels-photo-19190382.jpeg' 
+    name: 'carousel-cities', 
+    url: 'https://images.pexels.com/photos/4502973/pexels-photo-4502973.jpeg',
+    title: 'Explore Ancient Cities',
+    subtitle: 'From Marrakech to Fes'
   },
   { 
-    name: 'riads', 
-    url: 'https://images.pexels.com/photos/30257102/pexels-photo-30257102.jpeg' 
-  },
-  { 
-    name: 'water', 
-    url: 'https://images.pexels.com/photos/14602556/pexels-photo-14602556.jpeg' 
-  },
-  { 
-    name: 'food', 
-    url: 'https://images.pexels.com/photos/30574975/pexels-photo-30574975.jpeg' 
-  },
-  { 
-    name: 'waste', 
-    url: 'https://images.pexels.com/photos/4502972/pexels-photo-4502972.jpeg' 
-  },
-  { 
-    name: 'bottle', 
-    url: 'https://images.pexels.com/photos/4916544/pexels-photo-4916544.jpeg' 
-  },
-  { 
-    name: 'artisan', 
-    url: 'https://images.pexels.com/photos/8169414/pexels-photo-8169414.jpeg' 
-  },
-  { 
-    name: 'baskets', 
-    url: 'https://images.pexels.com/photos/4502967/pexels-photo-4502967.jpeg' 
-  },
-  { 
-    name: 'quality', 
-    url: 'https://images.pexels.com/photos/18687094/pexels-photo-18687094.jpeg' 
-  },
-  { 
-    name: 'heritage', 
-    url: 'https://images.pexels.com/photos/13811658/pexels-photo-13811658.jpeg' 
-  },
-  { 
-    name: 'hiking', 
-    url: 'https://images.pexels.com/photos/1632259/pexels-photo-1632259.jpeg' 
-  },
-  { 
-    name: 'photography', 
-    url: 'https://images.pexels.com/photos/4621092/pexels-photo-4621092.jpeg' 
-  },
-  { 
-    name: 'recycling', 
-    url: 'https://images.pexels.com/photos/30550611/pexels-photo-30550611.jpeg' 
-  },
-  { 
-    name: 'plastic', 
-    url: 'https://images.pexels.com/photos/30413959/pexels-photo-30413959.jpeg' 
-  },
-  { 
-    name: 'beach', 
-    url: 'https://images.pexels.com/photos/34626734/pexels-photo-34626734.jpeg' 
+    name: 'carousel-desert', 
+    url: 'https://images.pexels.com/photos/12214734/pexels-photo-12214734.jpeg',
+    title: 'Desert Adventures',
+    subtitle: 'Experience the Sahara'
   },
 ];
 
-// 🚀 Fonction pour uploader avec gestion d'erreurs
+// 🚀 Function to upload with error handling
 const uploadImage = async (img) => {
   try {
     console.log(`⏳ Uploading ${img.name}...`);
     
     const result = await cloudinary.uploader.upload(img.url, {
-      public_id: img.name, // Nom de l'image (sans extension)
-      folder: 'ecotips', // Dossier dans Cloudinary
-      overwrite: true, // Écrase si existe déjà
+      public_id: img.name,
+      folder: 'carousel', // Folder in Cloudinary
+      overwrite: true,
       resource_type: 'image',
       transformation: [
-        { width: 1200, crop: "limit" }, // Max 1200px de large
-        { quality: "auto:good" }, // Qualité automatique optimale
-        { fetch_format: "auto" } // Format optimal (WebP, AVIF)
+        { width: 1200, crop: "limit" }, // Max 1200px for hero images
+        { quality: "auto:good" },
+        { fetch_format: "auto" } // WebP/AVIF support
       ]
     });
     
@@ -97,7 +51,7 @@ const uploadImage = async (img) => {
     console.log(`   Size: ${(result.bytes / 1024).toFixed(2)} KB`);
     console.log('');
     
-    return result;
+    return { ...result, originalName: img.name, title: img.title, subtitle: img.subtitle };
   } catch (error) {
     console.error(`❌ Error uploading ${img.name}:`);
     console.error(`   ${error.message}`);
@@ -106,50 +60,54 @@ const uploadImage = async (img) => {
   }
 };
 
-// 🎯 Upload séquentiel pour éviter de surcharger l'API
+// 🎯 Sequential upload to avoid API overload
 const uploadAllImages = async () => {
   console.log('🚀 Starting upload to Cloudinary...\n');
-  console.log(`📁 Uploading ${images.length} images to folder: ecotips\n`);
+  console.log(`📁 Uploading ${carouselImages.length} carousel images\n`);
   
   const results = [];
   
-  for (const img of images) {
+  for (const img of carouselImages) {
     const result = await uploadImage(img);
     results.push(result);
     
-    // Pause de 500ms entre chaque upload pour être respectueux de l'API
+    // 500ms pause between uploads
     await new Promise(resolve => setTimeout(resolve, 500));
   }
   
-  // 📊 Résumé final
+  // 📊 Final summary
   const successful = results.filter(r => r !== null).length;
   const failed = results.length - successful;
   
   console.log('═══════════════════════════════════════');
   console.log('📊 UPLOAD SUMMARY');
   console.log('═══════════════════════════════════════');
-  console.log(`✅ Successful: ${successful}/${images.length}`);
-  console.log(`❌ Failed: ${failed}/${images.length}`);
+  console.log(`✅ Successful: ${successful}/${carouselImages.length}`);
+  console.log(`❌ Failed: ${failed}/${carouselImages.length}`);
   console.log('═══════════════════════════════════════\n');
   
-  // 🔗 Générer les URLs optimisées pour votre code
+  // 🔗 Generate optimized URLs for your code
   if (successful > 0) {
-    console.log('📋 Copy this to your constants/ecotips.ts:\n');
-    console.log('export const ANIMATED_IMAGES = {');
+    console.log('📋 Copy this to your carousel component:\n');
+    console.log('const carouselData = [');
     
     results.forEach((result, index) => {
       if (result) {
-        const name = images[index].name;
-        const url = `https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/ecotips/${name}.jpg`;
-        console.log(`  ${name}: '${url}',`);
+        const url = `https://res.cloudinary.com/dpkjgfhcc/image/upload/w_1200,q_auto,f_auto,dpr_auto/carousel/${result.originalName}.jpg`;
+        console.log(`  {`);
+        console.log(`    id: ${index + 1},`);
+        console.log(`    image: '${url}',`);
+        console.log(`    title: '${result.title}',`);
+        console.log(`    subtitle: '${result.subtitle}'`);
+        console.log(`  }${index < results.length - 1 ? ',' : ''}`);
       }
     });
     
-    console.log('};\n');
+    console.log('];\n');
   }
 };
 
-// 🎬 Exécution
+// 🎬 Execute
 uploadAllImages()
   .then(() => {
     console.log('🎉 All done!');

@@ -18,7 +18,7 @@ export function RegionCard({ region }: RegionCardProps) {
 
   const handlePress = () => {
     router.push({
-      pathname: '/exploreDetail',
+      pathname: '/region-detail',
       params: {
         regionId: region.id,
         regionName: region.name,

@@ -3,110 +3,110 @@
 export const FULL_REGIONS = [
   {
     id: 'tanger-tetouan',
-  name: 'Tanger-Tétouan-Al Hoceïma',
+    name: 'Tanger-Tétouan-Al Hoceïma',
     images: [
-      'https://images.pexels.com/photos/34337960/pexels-photo-34337960.jpeg',
-      'https://images.pexels.com/photos/34267555/pexels-photo-34267555.jpeg',
-      'https://images.pexels.com/photos/2507804/pexels-photo-2507804.jpeg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/tanger-tetouan-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/tanger-tetouan-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/tanger-tetouan-3.jpg'
     ],
   },
   {
-    id: "oriental",
-    name: "L'Oriental",
+    id: 'oriental',
+    name: 'L\'Oriental',
     images: [
-      'https://images.unsplash.com/photo-1577894947058-41fbcd53a69f?w=400',
-      'https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=400',
-      'https://images.unsplash.com/photo-1560089354-b2ec2b682a8c?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/oriental-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/oriental-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/oriental-3.jpg'
     ],
   },
   {
-    id: "fes-meknes",
-    name: "Fès-Meknès",
+    id: 'fes-meknes',
+    name: 'Fès-Meknès',
     images: [
-      'https://images.unsplash.com/photo-1593795899768-947c4929449d?w=400',
-      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400',
-      'https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/fes-meknes-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/fes-meknes-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/fes-meknes-3.jpg'
     ],
   },
   {
-    id: "rabat-sale",
-    name: "Rabat-Salé-Kénitra",
+    id: 'rabat-sale',
+    name: 'Rabat-Salé-Kénitra',
     images: [
-      'https://images.unsplash.com/photo-1558436914-9309d9eb4ae3?w=400',
-      'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=400',
-      'https://images.unsplash.com/photo-1561699212-92a6c5e5b6c0?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/rabat-sale-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/rabat-sale-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/rabat-sale-3.jpg'
     ],
   },
   {
-    id: "beni-mellal",
-    name: "Béni Mellal-Khénifra",
+    id: 'beni-mellal',
+    name: 'Béni Mellal-Khénifra',
     images: [
-      'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=400',
-      'https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=400',
-      'https://images.unsplash.com/photo-1548013146-72479768bada?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/beni-mellal-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/beni-mellal-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/beni-mellal-3.jpg'
     ],
   },
   {
-    id: "casablanca-settat",
-    name: "Casablanca-Settat",
+    id: 'casablanca-settat',
+    name: 'Casablanca-Settat',
     images: [
-      'https://images.unsplash.com/photo-1571761221231-accd67f00670?w=400',
-      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/casablanca-settat-1.jpg',      
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/casablanca-settat-2.jpg',      
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/casablanca-settat-3.jpg'       
     ],
   },
   {
     id: 'marrakech-safi',
     name: 'Marrakech-Safi',
     images: [
-      'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=400',
-      'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=400',
-      'https://images.unsplash.com/photo-1578836537282-0871a4d1acb9?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/marrakech-safi-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/marrakech-safi-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/marrakech-safi-3.jpg'
     ],
   },
   {
     id: 'draa-tafilalet',
     name: 'Drâa-Tafilalet',
     images: [
-      'https://images.unsplash.com/photo-1588668524531-f4c6d6b08d3f?w=400',
-      'https://images.unsplash.com/photo-1578632749014-ca77efd052eb?w=400',
-      'https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/draa-tafilalet-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/draa-tafilalet-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/draa-tafilalet-3.jpg'
     ],
   },
   {
     id: 'souss-massa',
     name: 'Souss-Massa',
     images: [
-      'https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?w=400',
-      'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=400',
-      'https://images.unsplash.com/photo-1561699212-92a6c5e5b6c0?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/souss-massa-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/souss-massa-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/souss-massa-3.jpg'
     ],
   },
   {
     id: 'guelmim-oued',
     name: 'Guelmim-Oued Noun',
     images: [
-      'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=400',
-      'https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=400',
-      'https://images.unsplash.com/photo-1548013146-72479768bada?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/guelmim-oued-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/guelmim-oued-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/guelmim-oued-3.jpg'
     ],
   },
   {
     id: 'laayoune-sakia',
     name: 'Laâyoune-Sakia El Hamra',
     images: [
-      'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=400',
-      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400',
-      'https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/laayoune-sakia-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/laayoune-sakia-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/laayoune-sakia-3.jpg'
     ],
   },
   {
     id: 'dakhla-oued',
     name: 'Dakhla-Oued Ed-Dahab',
     images: [
-      'https://images.unsplash.com/photo-1585037893061-e0d1d2c9143f?w=400',
-      'https://images.unsplash.com/photo-1551632706-3fa6c8f1a86e?w=400',
-      'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/dakhla-oued-1.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/dakhla-oued-2.jpg',
+      'https://res.cloudinary.com/dpkjgfhcc/image/upload/w_800,q_auto,f_auto,dpr_auto/regions/dakhla-oued-3.jpg'
     ],
   },
 ];
