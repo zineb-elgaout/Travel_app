@@ -38,12 +38,7 @@ const FilterChip = ({ label, icon, isActive, onPress }: any) => (
 );
 
 const carouselData = [
-  {
-    id: '1',
-    image: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800',
-    title: 'Aidez l\'Éducation',
-    subtitle: 'Transport scolaire pour les villages'
-  },
+ 
   {
     id: '2',
     image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800',
@@ -52,7 +47,7 @@ const carouselData = [
   },
   {
     id: '3',
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800',
+    image: 'https://tse3.mm.bing.net/th/id/OIP.MbJ5354gR0ZUMS65KR-SLwHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
     title: 'Accès à l\'Eau',
     subtitle: 'Construction de puits'
   }
@@ -78,21 +73,10 @@ export default function DonationsScreen() {
   ];
 
   const causes = [
-    {
-      id: '1',
-      title: 'Transport Scolaire Atlas',
-      subtitle: 'Villages de l\'Atlas',
-      description: 'Assurer le transport quotidien de 120 étudiants.',
-      goal: 50000,
-      current: 32500,
-      image: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800',
-      category: 'education',
-      impact: '120 étudiants',
-      contact: 'benevoles.atlas@example.com',
-    },
+    
     {
       id: '2',
-      title: 'Plantation d\'Arganiers',
+      title: 'Plantation ',
       subtitle: 'Essaouira',
       description: 'Planter 5000 arganiers pour préserver l\'écosystème.',
       goal: 30000,
@@ -109,7 +93,7 @@ export default function DonationsScreen() {
       description: 'Construire des puits pour l\'accès à l\'eau potable.',
       goal: 80000,
       current: 45000,
-      image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800',
+      image: 'https://tse3.mm.bing.net/th/id/OIP.MbJ5354gR0ZUMS65KR-SLwHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
       category: 'community',
       impact: '8 villages',
       contact: 'benevoles.sudmaroc@example.com',

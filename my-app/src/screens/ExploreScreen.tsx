@@ -6,10 +6,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { useLanguage } from '../contexts/LanguageContext';
 import { useExploreData } from '../hooks/useExploreData';
-import { getRouteForItem } from '../utils/navigation';
 import { CONTENT_FILTERS, SUB_FILTERS } from '../constants/explore';
 import { FULL_REGIONS } from '../constants/regions';
-import type { ContentFilterType } from '../types/explore';
+import type { ContentFilterType, DetailTabType } from '../types/explore';
 
 import {
   FilterChip,
@@ -18,17 +17,15 @@ import {
   SuggestionsGrid,
   EmptyState,
 } from '../components/explore';
-import BottomTabBar from '../components/BottomTabBar';
+import DetailContent from '../components/explore/DetailContent';
 import MenuSidebar from '../components/MenuSidebar';
 
 // Définition des onglets pour le détail
-const DETAIL_TABS = [
-  { id: 'information', label: 'Information' },
-  { id: 'contact', label: 'Contact' },
-  { id: 'ecotips', label: 'Ecotips' },
-  { id: 'avis', label: 'Avis' },
-  { id: 'photos', label: 'Photos' },
-  { id: 'videos', label: 'Videos' },
+const DETAIL_TABS: { id: DetailTabType; label: string }[] = [
+  { id: 'information', label: 'About' },
+  { id: 'avis', label: 'Review' },
+  { id: 'photos', label: 'Photo' },
+  { id: 'videos', label: 'Video' },
 ];
 
 export default function ExploreScreen() {
@@ -52,13 +49,16 @@ export default function ExploreScreen() {
   
   // États pour le modal de détail
   const [selectedItem, setSelectedItem] = useState<any>(null);
-  const [detailTab, setDetailTab] = useState('information');
+  const [detailTab, setDetailTab] = useState<DetailTabType>('information');
+  const [isFavorite, setIsFavorite] = useState(false);
   
   const scrollViewRef = useRef<ScrollView>(null);
   const scrollY = useRef(new Animated.Value(0)).current;
 
   // Appel du hook avec regionKey
   const { slides, suggestions } = useExploreData(regionKey, contentFilter, selectedCategory);
+
+  const availableContentFilters = CONTENT_FILTERS; 
 
   const handleContentFilterChange = useCallback((filterId: ContentFilterType) => {
     setContentFilter(filterId);
@@ -70,6 +70,7 @@ export default function ExploreScreen() {
     if (item) {
       setSelectedItem(item);
       setDetailTab('information');
+      setIsFavorite(item.isFavorite || false);
     }
   }, [slides, suggestions]);
 
@@ -86,100 +87,8 @@ export default function ExploreScreen() {
     setSelectedItem(null);
   };
 
-  // Fonction pour rendre le contenu du modal (style Zara)
-  const renderDetailContent = () => {
-    if (!selectedItem) return null;
-
-    const renderCard = (title: string, content: any, icon: string) => (
-      <View className="bg-white rounded-lg p-4 mb-4 border border-gray-100">
-        <View className="flex-row items-center mb-2">
-          <Ionicons name={icon} size={20} color="#1d4c4c" />
-          <Text className="text-lg font-semibold text-gray-900 ml-2">{title}</Text>
-        </View>
-        {content}
-      </View>
-    );
-
-    switch (detailTab) {
-      case 'information':
-        return renderCard(
-          'Information',
-          <Text className="text-gray-700 leading-6">
-            {selectedItem.description || 'Description non disponible.'}
-          </Text>,
-          'information-circle-outline'
-        );
-      case 'contact':
-        return renderCard(
-          'Contact',
-          <Text className="text-gray-700">
-            {selectedItem.contact || 'Informations de contact non disponibles.'}
-          </Text>,
-          'call-outline'
-        );
-      case 'ecotips':
-        return renderCard(
-          'Ecotips',
-          <Text className="text-gray-700 leading-6">
-            {selectedItem.ecotips || 'Conseils écologiques non disponibles.'}
-          </Text>,
-          'leaf-outline'
-        );
-      case 'avis':
-        return renderCard(
-          'Avis',
-          selectedItem.reviews?.length > 0 ? (
-            selectedItem.reviews.map((review: any, index: number) => (
-              <View key={index} className="flex-row items-start mb-3">
-                <Ionicons name="star" size={16} color="#fbbf24" />
-                <Text className="text-gray-700 ml-2 flex-1">{review}</Text>
-              </View>
-            ))
-          ) : (
-            <Text className="text-gray-500">Aucun avis disponible.</Text>
-          ),
-          'star-outline'
-        );
-      case 'photos':
-        return renderCard(
-          'Photos',
-          selectedItem.photos?.length > 0 ? (
-            <View className="flex-row flex-wrap">
-              {selectedItem.photos.map((photo: string, index: number) => (
-                <Image
-                  key={index}
-                  source={{ uri: photo }}
-                  className="w-20 h-20 m-1 rounded-lg"
-                  resizeMode="cover"
-                />
-              ))}
-            </View>
-          ) : (
-            <Text className="text-gray-500">Aucune photo disponible.</Text>
-          ),
-          'images-outline'
-        );
-      case 'videos':
-        return renderCard(
-          'Videos',
-          selectedItem.videos?.length > 0 ? (
-            selectedItem.videos.map((video: string, index: number) => (
-              <View key={index} className="flex-row items-center mb-3">
-                <Ionicons name="videocam" size={20} color="#1d4c4c" />
-                <Text className="text-gray-700 ml-2">{video}</Text>
-              </View>
-            ))
-          ) : (
-            <Text className="text-gray-500">Aucune vidéo disponible.</Text>
-          ),
-          'videocam-outline'
-        );
-      default:
-        return <Text className="text-gray-500">Contenu non disponible.</Text>;
-    }
-  };
-
   const activeSubFilters = SUB_FILTERS[contentFilter];
+  const availableSubFilters = activeSubFilters; 
 
   return (
     <View className="flex-1 bg-white">
@@ -196,69 +105,81 @@ export default function ExploreScreen() {
                 <Ionicons name="arrow-back" size={24} color="#1d4c4c" />
               </TouchableOpacity>
               
-              <View className="flex-1 mx-4">
-                <Text className="text-2xl font-bold text-gray-900 text-center">
+              <View className="flex-1 mx-2">
+                <Text className="text-xl font-bold text-gray-900 text-center">
                   {regionName}
                 </Text>
               </View>
             </View>
           </View>
 
-          {/* Filtres principaux (style Zara : épuré, sans scroll, marges bien créées) */}
-          <View className="px-6 py-4 bg-white border-b border-gray-100">
-            <View className="flex-row flex-wrap gap-3">
-              {CONTENT_FILTERS.map((filter) => (
-                <TouchableOpacity
-                  key={filter.id}
-                  onPress={() => handleContentFilterChange(filter.id as ContentFilterType)}
-                  className={`px-4 py-2 rounded-full border ${
-                    contentFilter === filter.id
-                      ? 'bg-[#1d4c4c] border-[#1d4c4c]'
-                      : 'bg-white border-gray-300'
-                  }`}
-                >
-                  <View className="flex-row items-center">
-                    <Ionicons
-                      name={filter.icon}
-                      size={16}
-                      color={contentFilter === filter.id ? 'white' : '#6B7280'}
-                    />
-                    <Text
-                      className={`ml-2 text-sm font-medium ${
-                        contentFilter === filter.id ? 'text-white' : 'text-gray-700'
-                      }`}
-                    >
-                      {t(filter.nameKey) || filter.nameKey}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
-
-          {/* Sous-filtres (style Zara : épuré, sans scroll, marges bien créées) */}
-          <View className="mb-4">
-            <View className="flex-row flex-wrap gap-3 px-6 py-2">
-              {activeSubFilters.map((tab) => (
-                <TouchableOpacity
-                  key={tab.id}
-                  onPress={() => setSelectedCategory(tab.id)}
-                  className={`px-4 py-2 rounded-full border ${
-                    selectedCategory === tab.id
-                      ? 'bg-[#1d4c4c] border-[#1d4c4c]'
-                      : 'bg-white border-gray-300'
-                  }`}
-                >
-                  <Text
-                    className={`text-sm font-medium ${
-                      selectedCategory === tab.id ? 'text-white' : 'text-gray-700'
+          {/* Filtres principaux (scrollable horizontalement) */}
+          <View className="py-4 bg-white border-b border-gray-100">
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingHorizontal: 20 }}
+            >
+              <View className="flex-row gap-3">
+                {availableContentFilters.map((filter) => (
+                  <TouchableOpacity
+                    key={filter.id}
+                    onPress={() => handleContentFilterChange(filter.id as ContentFilterType)}
+                    className={`px-4 py-2 rounded-full border ${
+                      contentFilter === filter.id
+                        ? 'bg-[#1d4c4c] border-[#1d4c4c]'
+                        : 'bg-white border-gray-300'
                     }`}
                   >
-                    {t(tab.nameKey) || tab.nameKey}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+                    <View className="flex-row items-center">
+                      <Ionicons
+                        name={filter.icon}
+                        size={16}
+                        color={contentFilter === filter.id ? 'white' : '#6B7280'}
+                      />
+                      <Text
+                        className={`ml-2 text-sm font-medium ${
+                          contentFilter === filter.id ? 'text-white' : 'text-gray-700'
+                        }`}
+                      >
+                        {t(filter.nameKey) || filter.nameKey}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
+
+          {/* Sous-filtres (scrollable horizontalement) */}
+          <View className="mb-4">
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingHorizontal: 20, paddingVertical: 8 }}
+            >
+              <View className="flex-row gap-3">
+                {availableSubFilters.map((tab) => (
+                  <TouchableOpacity
+                    key={tab.id}
+                    onPress={() => setSelectedCategory(tab.id)}
+                    className={`px-4 py-2 rounded-full border ${
+                      selectedCategory === tab.id
+                        ? 'bg-[#1d4c4c] border-[#1d4c4c]'
+                        : 'bg-white border-gray-300'
+                    }`}
+                  >
+                    <Text
+                      className={`text-sm font-medium ${
+                        selectedCategory === tab.id ? 'text-white' : 'text-gray-700'
+                      }`}
+                    >
+                      {t(tab.nameKey) || tab.nameKey}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
           </View>
 
           {/* Contenu scrollable */}
@@ -286,11 +207,6 @@ export default function ExploreScreen() {
                     {t('suggestions') || 'Suggestions'}
                   </Text>
                 </View>
-                <TouchableOpacity>
-                  <Text className="text-blue-600 text-sm font-semibold">
-                    {t('viewAll') || 'Voir tout'}
-                  </Text>
-                </TouchableOpacity>
               </View>
 
               {suggestions.length > 0 ? (
@@ -324,71 +240,112 @@ export default function ExploreScreen() {
         </View>
       </SafeAreaView>
 
-      {/* Modal pour le détail (inspiré de Zara) */}
+      {/* Modal pour le détail - Design moderne comme l'image */}
       <Modal
         visible={!!selectedItem}
         animationType="slide"
-        onRequestClose={closeDetailModal}
-        presentationStyle="fullScreen"
         transparent={false}
+        onRequestClose={closeDetailModal}
       >
-        <SafeAreaView className="flex-1 bg-white">
-          {/* Image en haut avec overlay */}
-          <View className="relative">
+        <View className="flex-1 bg-white">
+          {/* Header avec image */}
+          <View className="relative h-64">
             <Image
-              source={{ uri: selectedItem?.image }}
-              className="w-full h-80"
+              source={{ uri: selectedItem?.image || 'https://via.placeholder.com/800' }}
+              className="w-full h-full"
               resizeMode="cover"
             />
-            <View className="absolute inset-0 bg-black bg-opacity-20" />
-            <View className="absolute top-12 left-6 right-6 flex-row justify-between items-center">
-              <Text className="text-white text-2xl font-bold shadow-lg">
-                {selectedItem?.name}
-              </Text>
+            
+            {/* Boutons de navigation */}
+            <View className="absolute top-12 left-0 right-0 flex-row justify-between px-4">
               <TouchableOpacity
                 onPress={closeDetailModal}
-                className="w-10 h-10 bg-white bg-opacity-80 rounded-full items-center justify-center"
+                className="bg-white/90 p-2.5 rounded-full shadow-lg"
               >
-                <Ionicons name="close" size={20} color="#333" />
+                <Ionicons name="chevron-back" size={24} color="#1f2937" />
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                onPress={() => setIsFavorite(!isFavorite)}
+                className="bg-white/90 p-2.5 rounded-full shadow-lg"
+              >
+                <Ionicons 
+                  name={isFavorite ? "heart" : "heart-outline"} 
+                  size={24} 
+                  color={isFavorite ? "#ef4444" : "#1f2937"} 
+                />
               </TouchableOpacity>
             </View>
           </View>
 
-          {/* Onglets élégants */}
-          <View className="bg-white border-b border-gray-100">
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ paddingHorizontal: 20, paddingVertical: 16 }}
-            >
+          {/* Contenu */}
+          <View className="flex-1 px-5 pt-5">
+            {/* Titre et infos */}
+            <View className="mb-4">
+              <Text className="text-2xl font-bold text-gray-900 mb-2">
+                {selectedItem?.name || 'Titre'}
+              </Text>
+              
+              <View className="flex-row items-center mb-2">
+                <Ionicons name="location" size={16} color="#ef4444" />
+                <Text className="text-gray-600 text-sm ml-2">
+                  {selectedItem?.location || 'Location'}
+                </Text>
+              </View>
+              
+              <View className="flex-row items-center">
+                <Text className="text-lg font-semibold text-gray-900 mr-2">
+                  {selectedItem?.rating || '4.8'}
+                </Text>
+                {[...Array(5)].map((_, i) => (
+                  <Ionicons key={i} name="star" size={16} color="#fbbf24" />
+                ))}
+              </View>
+            </View>
+
+            {/* Tabs */}
+            <View className="flex-row border-b border-gray-200 mb-4">
               {DETAIL_TABS.map((tab) => (
                 <TouchableOpacity
                   key={tab.id}
                   onPress={() => setDetailTab(tab.id)}
-                  className="mr-8 pb-2"
+                  className="flex-1 pb-3 relative"
                 >
                   <Text
-                    className={`text-sm font-medium ${
-                      detailTab === tab.id ? 'text-[#1d4c4c]' : 'text-gray-500'
+                    className={`text-center text-sm font-medium ${
+                      detailTab === tab.id ? 'text-gray-900' : 'text-gray-500'
                     }`}
                   >
                     {tab.label}
                   </Text>
                   {detailTab === tab.id && (
-                    <View className="h-0.5 bg-[#1d4c4c] mt-1 rounded-full" />
+                    <View className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-500 rounded-full" />
                   )}
                 </TouchableOpacity>
               ))}
-            </ScrollView>
-          </View>
-
-          {/* Contenu dynamique */}
-          <ScrollView className="flex-1 bg-gray-50" showsVerticalScrollIndicator={false}>
-            <View className="p-6">
-              {renderDetailContent()}
             </View>
-          </ScrollView>
-        </SafeAreaView>
+
+            {/* Contenu scrollable */}
+            <ScrollView 
+              className="flex-1 -mx-5"
+              showsVerticalScrollIndicator={false}
+            >
+              <DetailContent selectedItem={selectedItem} detailTab={detailTab} />
+            </ScrollView>
+
+            {/* Bouton Save Trip */}
+            <View className="py-5">
+              <TouchableOpacity 
+                className="bg-pink-500 py-4 rounded-full shadow-lg"
+                activeOpacity={0.8}
+              >
+                <Text className="text-white text-center font-semibold text-base">
+                  Save a Trip
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
       </Modal>
 
       <MenuSidebar 

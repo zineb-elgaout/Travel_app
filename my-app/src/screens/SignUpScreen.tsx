@@ -69,7 +69,7 @@ export default function SignUpScreen() {
         {/* Bouton Sign Up */}
         <TouchableOpacity 
           className="bg-black rounded-none py-4 px-8 mb-8 active:opacity-80"
-          onPress={() => router.push('/explore')}
+          onPress={() => router.push('/login')}
         >
           <Text className="text-white text-center text-base font-medium uppercase tracking-widest">
             {t('signUp')}

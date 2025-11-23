@@ -22,26 +22,13 @@ export default function OnboardingScreen() {
       descKey: 'slide1_desc',
     },
     {
-      image: require('../../assets/images/chawen.jpg'),
-      color: '#ffffff',
-      titleKey: 'slide2_title',
-      subtitleKey: 'slide2_subtitle',
-      descKey: 'slide2_desc',
-    },
-    {
       image:  require('../../assets/images/marakech.jpg'),
       color: '#F59E0B',
       titleKey: 'slide3_title',
       subtitleKey: 'slide3_subtitle',
       descKey: 'slide3_desc',
     },
-    {
-      image:  require('../../assets/images/tborida.jpg'),
-      color: '#F59E0B',
-      titleKey: 'slide4_title',
-      subtitleKey: 'slide4_subtitle',
-      descKey: 'slide4_desc',
-    },
+    
     {
       image: require('../../assets/images/sahara.jpg'),
       color: '#F59E0B',
@@ -115,7 +102,7 @@ export default function OnboardingScreen() {
   };
 
   const handleGetStarted = () => {
-    router.replace('/explore');
+    router.replace('/home');
   };
 
   return (
