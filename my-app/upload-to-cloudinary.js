@@ -2,9 +2,9 @@
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-  cloud_name: 'dpkjgfhcc',
-  api_key: '915729591589788',
-  api_secret: 'kX2n1tJcxjCNma9z0YU3htgVnkc'
+  cloud_name: '..................',
+  api_key: '...................',
+  api_secret: '...........'
 });
 
 // 📸 Carousel images
